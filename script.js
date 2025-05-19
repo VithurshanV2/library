@@ -49,5 +49,28 @@ function displayBooks() {
     });
 }
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, false);
-console.log(myLibrary);
+const showNewBookBtn = document.getElementById("showNewBook");
+const confirmBtn = document.getElementById("confirmBtn");
+const newBookDialog = document.getElementById("newBookDialog");
+
+showNewBookBtn.addEventListener("click", () => {
+    newBookDialog.showModal();
+});
+
+confirmBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const title = document.getElementById("title").value.trim();
+    const author = document.getElementById("author").value.trim();
+    const pages = parseInt(document.getElementById("pages").value, 10);
+    const read = document.getElementById("read").value === "true";
+
+    if (title && author && pages) {
+        addBookToLibrary(title, author, pages, read);
+        newBookDialog.close();
+        document.getElementById("bookForm").reset();
+    }
+});
+
+document.querySelector('button[value="cancel"]').addEventListener("click", () => {
+    newBookDialog.close();
+})

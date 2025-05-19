@@ -1,14 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1>My Library</h1>
-    
+
+    <dialog id="newBookDialog">
+        <form id="bookForm" method="dialog">
+            <p>
+                <label for="title">
+                    Title: <input type="text" id="title" name="title" required>
+                </label>
+            </p>
+            <p>
+                <label for="author">
+                    Author: <input type="text" id="author" name="author" required>
+                </label>
+            </p>
+            <p>
+                <label for="pages">
+                    Pages: <input type="number" id="pages" name="pages" min="1" required>
+                </label>
+            </p>
+            <p>
+                <label for="read">
+                    Read:
+                    <select name="read" id="read">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+                </label>
+            </p>
+            <div>
+                <button value="cancel">Cancel</button>
+                <button id="confirmBtn">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+    <p>
+        <button id="showNewBook">New Book</button>
+    </p>
+
     <table id="booksTable" border="1">
         <thead>
             <tr>
@@ -22,6 +60,7 @@
             <!-- books details will be added here -->
         </tbody>
     </table>
-   <script src="script.js"></script> 
+    <script src="script.js"></script>
 </body>
+
 </html>
