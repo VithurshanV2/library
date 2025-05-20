@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, read) {
     if (!new.target) {
@@ -41,10 +41,23 @@ function displayBooks() {
         const readCell = document.createElement('td');
         readCell.textContent = book.read ? 'Read' : 'Not read yet';
 
+        const removeCell = document.createElement('td');
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+
+        removeBtn.dataset.id = book.id;
+
+        removeBtn.addEventListener("click", (event) => {
+            const idToRemove = event.target.dataset.id;
+            removeBook(idToRemove);
+        });
+
         row.appendChild(titleCell);
         row.appendChild(authorCell);
         row.appendChild(pagesCell);
         row.appendChild(readCell);
+        removeCell.appendChild(removeBtn);
+        row.appendChild(removeCell);
         tableBody.appendChild(row);
     });
 }
@@ -74,3 +87,8 @@ confirmBtn.addEventListener("click", (event) => {
 document.querySelector('button[value="cancel"]').addEventListener("click", () => {
     newBookDialog.close();
 })
+
+function removeBook(id) {
+    myLibrary = myLibrary.filter(book => book.id !== id);
+    displayBooks();
+}
