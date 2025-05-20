@@ -75,7 +75,7 @@ confirmBtn.addEventListener("click", (event) => {
     const title = document.getElementById("title").value.trim();
     const author = document.getElementById("author").value.trim();
     const pages = parseInt(document.getElementById("pages").value, 10);
-    const read = document.getElementById("read").value === "true";
+    const read = document.getElementById("read").checked;
 
     if (title && author && pages) {
         addBookToLibrary(title, author, pages, read);
@@ -86,7 +86,7 @@ confirmBtn.addEventListener("click", (event) => {
 
 document.querySelector('button[value="cancel"]').addEventListener("click", () => {
     newBookDialog.close();
-})
+});
 
 function removeBook(id) {
     myLibrary = myLibrary.filter(book => book.id !== id);
