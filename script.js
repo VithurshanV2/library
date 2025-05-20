@@ -16,6 +16,10 @@ function Book(title, author, pages, read) {
     }
 }
 
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+}
+
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
@@ -39,11 +43,20 @@ function displayBooks() {
         pagesCell.textContent = book.pages;
 
         const readCell = document.createElement('td');
-        readCell.textContent = book.read ? 'Read' : 'Not read yet';
+        const toggleBtn = document.createElement('button');
+        toggleBtn.textContent = book.read ? 'Mark as Unread' : 'Mark as Read';
+        toggleBtn.setAttribute('aria-label', book.read ? 'Mark this book as unread' : 'Mark this book as read');
+        toggleBtn.title = book.read ? 'Click to mark as unread' : 'Click to mark as read';
+
+        toggleBtn.addEventListener("click", (event) => {
+            book.toggleRead();
+            displayBooks();
+        });
 
         const removeCell = document.createElement('td');
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
+        removeBtn.setAttribute('aria-label', 'Remove this book');
 
         removeBtn.dataset.id = book.id;
 
@@ -55,6 +68,7 @@ function displayBooks() {
         row.appendChild(titleCell);
         row.appendChild(authorCell);
         row.appendChild(pagesCell);
+        readCell.appendChild(toggleBtn);
         row.appendChild(readCell);
         removeCell.appendChild(removeBtn);
         row.appendChild(removeCell);
